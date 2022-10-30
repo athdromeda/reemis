@@ -13,45 +13,56 @@ const Tab1 = () => {
         <Form.Control type="text" placeholder="Masukkan nama lengkap" />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Jenis Kelamin</Form.Label>
-        <br />
-        <Form.Check
-          inline
-          label="Laki-laki"
-          name="group1"
-          type="radio"
-          id="inline-radio-1"
-          checked
-        />
-        <Form.Check
-          inline
-          label="Perempuan"
-          name="group1"
-          type="radio"
-          id="inline-radio-2"
-        />
-      </Form.Group>
+      <Row>
+        <Col>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Jenis Kelamin</Form.Label>
+            <br />
+            <Form.Check
+              inline
+              label="Laki-laki"
+              name="group1"
+              type="radio"
+              id="inline-radio-1"
+              checked
+            />
+            <Form.Check
+              inline
+              label="Perempuan"
+              name="group1"
+              type="radio"
+              id="inline-radio-2"
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Kewarganegaraan</Form.Label>
+            <br />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Kewarganegaraan</Form.Label>
-        <br />
-        <Form.Check
-          inline
-          label="WNI"
-          name="group2"
-          type="radio"
-          id="inline-radio-1"
-          checked
-        />
-        <Form.Check
-          inline
-          label="WNA"
-          name="group2"
-          type="radio"
-          id="inline-radio-2"
-        />
-      </Form.Group>
+            <Form.Check
+              inline
+              label="WNI"
+              name="group2"
+              type="radio"
+              value="WNI"
+              id="inline-radio-1"
+              onClick={() => setWNA(false)}
+              checked={!isWNA}
+            />
+            <Form.Check
+              inline
+              label="WNA"
+              name="group2"
+              type="radio"
+              value="WNA"
+              onClick={() => setWNA(true)}
+              id="inline-radio-2"
+              checked={isWNA}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>TTL</Form.Label>
@@ -115,10 +126,12 @@ const Tab1 = () => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>No Paspor</Form.Label>
-        <Form.Control type="text" placeholder="Masukkan Nomor Paspor" />
-      </Form.Group>
+      {isWNA && (
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>No Paspor</Form.Label>
+          <Form.Control type="text" placeholder="Masukkan Nomor Paspor" />
+        </Form.Group>
+      )}
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Dropdown label="Hobi" options={DropdownOptions.hobi} />

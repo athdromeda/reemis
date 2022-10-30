@@ -8,6 +8,7 @@ import Tab2 from "../Tabs/Tab2";
 import Tab3 from "../Tabs/Tab3";
 import Tab4 from "../Tabs/Tab4";
 import Tab5 from "../Tabs/Tab5";
+import { Button } from "react-bootstrap";
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
 }
 
 function ControlledTabs() {
-  const [key, setKey] = useState("home");
+  const [key, setKey] = useState("1");
 
   return (
     <Tabs
@@ -37,20 +38,25 @@ function ControlledTabs() {
       className="mb-3"
       justify
     >
-      <Tab eventKey="home" title="1 - Data Diri">
+      <Tab eventKey="1" title="1 - Data Diri">
         <Tab1 />
+        <Button onClick={()=>{setKey(2)}}>Lanjut</Button>
       </Tab>
-      <Tab eventKey="profile" title="2 - Data Ibu">
+      <Tab eventKey="2" title="2 - Data Ibu">
         <Tab2 />
+        <Button onClick={()=>{setKey(3)}}>Lanjut</Button>
       </Tab>
-      <Tab eventKey="contact" title="3 - Data Ayah">
+      <Tab eventKey="3" title="3 - Data Ayah">
         <Tab3/>
+        <Button onClick={()=>{setKey(4)}}>Lanjut</Button>
       </Tab>
       <Tab eventKey="4" title="4 - Data Wali">
         <Tab4/>
+        <Button onClick={()=>{setKey(5)}}>Lanjut</Button>
       </Tab>
       <Tab eventKey="5" title="5 - Alamat">
         <Tab5/>
+        <Button onClick={()=>{setKey(1)}}>Lanjut</Button>
       </Tab>
     </Tabs>
   );
