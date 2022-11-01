@@ -27,13 +27,6 @@ const Tab2 = () => {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Dropdown label="Pendidikan" options={DropdownOptions.pendidikan} />
       </Form.Group>
-
-      <Button variant="primary" type="submit">
-        Kembali
-      </Button>
-      <Button variant="primary" type="submit">
-        Lanjut
-      </Button>
     </Form>
   );
 };

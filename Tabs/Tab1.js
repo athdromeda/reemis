@@ -171,10 +171,6 @@ const Tab1 = () => {
           id="inline-radio-2"
         />
       </Form.Group>
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
     </Form>
   );
 };

@@ -42,10 +42,6 @@ const Tab5 = () => {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Dropdown label="Kec" options={DropdownOptions.statusRumah} />
       </Form.Group>
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
     </Form>
   );
 };

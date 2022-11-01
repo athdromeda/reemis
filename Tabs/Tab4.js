@@ -30,9 +30,6 @@ const Tab4 = () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
     </Form>
   );
 };
