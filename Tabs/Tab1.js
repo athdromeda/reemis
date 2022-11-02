@@ -2,20 +2,40 @@ import Dropdown from "../Components/Dropdown";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { DropdownOptions } from "../Data/data";
 import { useState } from "react";
+import { useFormik } from "formik";
+import { YupSchema } from "../Data/data";
+import TextInput from "../Components/TextInput";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  name: YupSchema.name,
+  nik: YupSchema.nik,
+});
 
 const Tab1 = () => {
   const [isWNA, setWNA] = useState(false);
 
+  const formik = useFormik({
+    initialValues: {},
+    validationSchema,
+    onSubmit: (vals) => {
+      alert(JSON.stringify(vals, null, 2));
+    },
+  });
+
   return (
     <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Nama</Form.Label>
-        <Form.Control type="text" placeholder="Masukkan nama lengkap" />
-      </Form.Group>
+      <TextInput
+        id="name"
+        label="Nama Lengkap"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.name}
+        errorLog={formik.errors.name}
+      />
 
       <Row>
         <Col>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="gender">
             <Form.Label>Jenis Kelamin</Form.Label>
             <br />
             <Form.Check
@@ -36,7 +56,7 @@ const Tab1 = () => {
           </Form.Group>
         </Col>
         <Col>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="nationality">
             <Form.Label>Kewarganegaraan</Form.Label>
             <br />
 
@@ -64,67 +84,79 @@ const Tab1 = () => {
         </Col>
       </Row>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>TTL</Form.Label>
-        <Row>
-          <Col>
-            <Form.Control type="text" placeholder="Tempat lahir" />
-          </Col>
-          <Col>
+      <Row>
+        <Col>
+          <TextInput
+            id="birthPlace"
+            label="Tempat"
+            handleChange={formik.handleChange}
+            handleValue={formik.values.birthPlace}
+            errorLog={formik.errors.birthPlace}
+          />
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Tanggal Lahir</Form.Label>
             <Form.Control type="date" />
-          </Col>
-        </Row>
-      </Form.Group>
+          </Form.Group>
+        </Col>
+      </Row>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>NISN</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Masukkan Nomor Induk Siswa Nasional"
-        />
-      </Form.Group>
+      <TextInput
+        id="nisn"
+        label="NISN"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.nisn}
+        errorLog={formik.errors.nisn}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>No. KK</Form.Label>
-        <Form.Control type="text" placeholder="Masukkan Nomor Kartu Keluarga" />
-      </Form.Group>
+      <TextInput
+        id="kk"
+        label="KK"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.kk}
+        errorLog={formik.errors.kk}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>NIK</Form.Label>
-        <Form.Control type="text" placeholder="Masukkan NIK" />
-      </Form.Group>
+      <TextInput
+        id="nik"
+        label="NIK"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.nik}
+        errorLog={formik.errors.nik}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>NISM</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Masukkan Nomor Induk Siswa Madrasah"
-        />
-      </Form.Group>
+      <TextInput
+        id="nism"
+        label="NISM"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.nism}
+        errorLog={formik.errors.nism}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>KIP</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Masukkan Nomor Kartu Indonesia Pintar"
-        />
-      </Form.Group>
+      <TextInput
+        id="kip"
+        label="KIP"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.kip}
+        errorLog={formik.errors.kip}
+      />
 
-      <Form.Group className="mb-3" controlId="formPKH">
-        <Form.Label>PKH</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Masukkan Nomor Program Keluarga Harapan"
-        />
-      </Form.Group>
+      <TextInput
+        id="pkh"
+        label="PKH"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.pkh}
+        errorLog={formik.errors.pkh}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>KKS</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Masukkan Nomor Kartu Keluarga Sejahtera"
-        />
-      </Form.Group>
+      <TextInput
+        id="kks"
+        label="KKS"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.kks}
+        errorLog={formik.errors.kks}
+      />
 
       {isWNA && (
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -133,24 +165,37 @@ const Tab1 = () => {
         </Form.Group>
       )}
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Dropdown label="Hobi" options={DropdownOptions.hobi} />
-      </Form.Group>
+      <Dropdown
+        id="hobby"
+        label="Hobi"
+        options={DropdownOptions.hobi}
+        handleChange={formik.handleChange}
+        handleValue={formik.values.hobby}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Dropdown label="Cita-cita" options={DropdownOptions.citaCita} />
-      </Form.Group>
+      <Dropdown
+        id="dream"
+        label="Cita"
+        options={DropdownOptions.citaCita}
+        handleChange={formik.handleChange}
+        handleValue={formik.values.dream}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Dropdown
-          label="Kebutuhan Khusus"
-          options={DropdownOptions.kebutuhanKhusus}
-        />
-      </Form.Group>
+      <Dropdown
+        id="specialNeeds"
+        label="Kebutuhan Khusus"
+        options={DropdownOptions.kebutuhanKhusus}
+        handleChange={formik.handleChange}
+        handleValue={formik.values.specialNeeds}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Dropdown label="Status Rumah" options={DropdownOptions.statusRumah} />
-      </Form.Group>
+      <Dropdown
+        id="statusRumah"
+        label="Status Rumah"
+        options={DropdownOptions.statusRumah}
+        handleChange={formik.handleChange}
+        handleValue={formik.values.statusRumah}
+      />
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Status Mukim</Form.Label>
@@ -171,6 +216,10 @@ const Tab1 = () => {
           id="inline-radio-2"
         />
       </Form.Group>
+
+      <Button variant="primary" onClick={formik.handleSubmit}>
+        Submit
+      </Button>
     </Form>
   );
 };

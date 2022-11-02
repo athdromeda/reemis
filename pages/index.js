@@ -40,23 +40,18 @@ function ControlledTabs() {
     >
       <Tab eventKey="1" title="1 - Data Diri">
         <Tab1 />
-        <Button onClick={()=>{setKey(2)}}>Lanjut</Button>
       </Tab>
       <Tab eventKey="2" title="2 - Data Ibu">
         <Tab2 />
-        <Button onClick={()=>{setKey(3)}}>Lanjut</Button>
       </Tab>
       <Tab eventKey="3" title="3 - Data Ayah">
         <Tab3/>
-        <Button onClick={()=>{setKey(4)}}>Lanjut</Button>
       </Tab>
       <Tab eventKey="4" title="4 - Data Wali">
         <Tab4/>
-        <Button onClick={()=>{setKey(5)}}>Lanjut</Button>
       </Tab>
       <Tab eventKey="5" title="5 - Alamat">
         <Tab5/>
-        <Button onClick={()=>{setKey(1)}}>Lanjut</Button>
       </Tab>
     </Tabs>
   );

@@ -1,34 +1,72 @@
 import Dropdown from "../Components/Dropdown";
 import { Form, Button } from "react-bootstrap";
 import { DropdownOptions } from "../Data/data";
+import { useFormik } from "formik";
+import { YupSchema } from "../Data/data";
+import TextInput from "../Components/TextInput";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  motherName: YupSchema.name,
+  motherNik: YupSchema.nik,
+});
 
 const Tab2 = () => {
+  const formik = useFormik({
+    initialValues: {},
+    validationSchema,
+    onSubmit: (vals) => {
+      alert(JSON.stringify(vals, null, 2));
+      console.log(JSON.stringify(vals, null, 2));
+    },
+  });
+
   return (
     <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Nama Ibu</Form.Label>
-        <Form.Control type="text" placeholder="Masukkan nama ibu" />
-      </Form.Group>
+      <TextInput
+        id="motherName"
+        label="Nama Ibu"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.motherName}
+        errorLog={formik.errors.motherName}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>NIK</Form.Label>
-        <Form.Control type="text" placeholder="Masukkan NIK" />
-      </Form.Group>
+      <TextInput
+        id="motherNik"
+        label="NIK"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.motherNik}
+        errorLog={formik.errors.motherNik}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Telepon</Form.Label>
-        <Form.Control type="text" placeholder="Masukkan nomor telepon" />
-      </Form.Group>
+      <TextInput
+        id="motherPhone"
+        label="No. HP"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.motherPhone}
+        errorLog={formik.errors.motherPhone}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Dropdown label="Pekerjaan" options={DropdownOptions.pekerjaan} />
-      </Form.Group>
+      <Dropdown
+        id="job"
+        label="Pekerjaan"
+        options={DropdownOptions.pekerjaan}
+        handleChange={formik.handleChange}
+        handleValue={formik.values.job}
+      />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Dropdown label="Pendidikan" options={DropdownOptions.pendidikan} />
-      </Form.Group>
+      <Dropdown
+        id="education"
+        label="Pendidikan"
+        options={DropdownOptions.pendidikan}
+        handleChange={formik.handleChange}
+        handleValue={formik.values.education}
+      />
+
+      <Button variant="primary" onClick={formik.handleSubmit}>
+        Submit
+      </Button>
     </Form>
   );
 };
-
 export default Tab2;

@@ -1,35 +1,62 @@
 import Dropdown from "../Components/Dropdown";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { DropdownOptions } from "../Data/data";
+import { useFormik } from "formik";
+import { YupSchema } from "../Data/data";
+import TextInput from "../Components/TextInput";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({});
 
 const Tab5 = () => {
+  const formik = useFormik({
+    initialValues: {},
+    validationSchema,
+    onSubmit: (vals) => {
+      alert(JSON.stringify(vals, null, 2));
+      console.log(JSON.stringify(vals, null, 2));
+    },
+  });
+
   return (
     <Form>
       <Row>
         <Col>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>RT</Form.Label>
-            <Form.Control type="text" inline />
-          </Form.Group>
+          <TextInput
+            id="rt"
+            label="RT"
+            handleChange={formik.handleChange}
+            handleValue={formik.values.rt}
+            errorLog={formik.errors.rt}
+          />
         </Col>
         <Col>
-          <Form.Group className="mb-3  ml-4" controlId="formBasicEmail">
-            <Form.Label>RW</Form.Label>
-            <Form.Control type="text" />
-          </Form.Group>
+          <TextInput
+            id="rw"
+            label="RW"
+            handleChange={formik.handleChange}
+            handleValue={formik.values.rw}
+            errorLog={formik.errors.rw}
+          />
         </Col>
         <Col>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Kode Pos</Form.Label>
-            <Form.Control type="text" placeholder="Masukkan kode pos" />
-          </Form.Group>
+          <TextInput
+            id="postalCode"
+            label="Kode Pos"
+            handleChange={formik.handleChange}
+            handleValue={formik.values.postalCode}
+            errorLog={formik.errors.postalCode}
+          />
         </Col>
       </Row>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Alamat Rinci</Form.Label>
-        <Form.Control type="text" placeholder="Misal: Jl. Raya No. X" />
-      </Form.Group>
+      <TextInput
+        id="addres"
+        label="Alamat"
+        handleChange={formik.handleChange}
+        handleValue={formik.values.address}
+        errorLog={formik.errors.address}
+      />
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Dropdown label="Provinsi" options={DropdownOptions.statusRumah} />

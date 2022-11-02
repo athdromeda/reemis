@@ -1,3 +1,5 @@
+import * as Yup from "yup";
+
 export const DropdownOptions = {
   hobi: [
     "Olahraga",
@@ -53,42 +55,48 @@ export const DropdownOptions = {
     "S3",
   ],
   penghasilan: [
-      "Tidak berpenghasilan",
-      "Kurang dari 500.000",
-      "Rp. 500.001 - Rp. 1.000.000",
-      "Rp. 1.000.001 - Rp. 2.000.000",
-      "Rp. 2.000.001 - Rp. 3.000.000",
-      "Rp. 3.000.001 - Rp. 4.000.000",
-      "Rp. 4.000.001 - Rp. 5.000.000",
-      ">= Rp. 5.000.001",
+    "Tidak berpenghasilan",
+    "Kurang dari 500.000",
+    "Rp. 500.001 - Rp. 1.000.000",
+    "Rp. 1.000.001 - Rp. 2.000.000",
+    "Rp. 2.000.001 - Rp. 3.000.000",
+    "Rp. 3.000.001 - Rp. 4.000.000",
+    "Rp. 4.000.001 - Rp. 5.000.000",
+    ">= Rp. 5.000.001",
   ],
   pekerjaan: [
-      "Tidak bekerja",
-      "Buruh (Tani/Pabrik/Bangunan)",
-      "Dokter/Bidan/Perawat",
-      "Guru/Dosen",
-      "Nelayan",
-      "Pedagang",
-      "Pegawai Swasta",
-      "Pengacara/Hakim/Jaksa/Notaris",
-      "Pensiunan",
-      "Petani/Peternak",
-      "Pilot/Pramugara",
-      "PNS",
-      "Politikus",
-      "Seniman/Pelukis/Artis/Sejenis",
-      "Sopir/Masinis/Kondektur",
-      "TNI/Polisi",
-      "Wiraswasta",
-      "Lainnya",
-      "Tidak Mengisi",
+    "Tidak bekerja",
+    "Buruh (Tani/Pabrik/Bangunan)",
+    "Dokter/Bidan/Perawat",
+    "Guru/Dosen",
+    "Nelayan",
+    "Pedagang",
+    "Pegawai Swasta",
+    "Pengacara/Hakim/Jaksa/Notaris",
+    "Pensiunan",
+    "Petani/Peternak",
+    "Pilot/Pramugara",
+    "PNS",
+    "Politikus",
+    "Seniman/Pelukis/Artis/Sejenis",
+    "Sopir/Masinis/Kondektur",
+    "TNI/Polisi",
+    "Wiraswasta",
+    "Lainnya",
+    "Tidak Mengisi",
   ],
-  hubunganWali: [
-      "Kakek/Nenek",
-      "Paman/Bibi",
-      "Kakak",
-      "Lainnya"
-  ]
+  hubunganWali: ["Kakek/Nenek", "Paman/Bibi", "Kakak", "Lainnya"],
+};
+
+export const YupSchema = {
+  name: Yup.string().min(12, "Banyakin lagi").required("Wajib diisi"),
+  nik: Yup.string().length(16, "NIK berjumlah 16 digit").required("Wajib diisi"),
+  kk: Yup.string().length(16, "No. KK berjumlah 16 digit").required("Wajib diisi"),
+  nisn: Yup.string().length(10, "No. NISN berjumlah 10 digit").required("Wajib diisi"),
+  nism: Yup.string().length(18, "No. NISM berjumlah 18 digit"),
+  kip: Yup.string().length(6, "No. KIP berjumlah 6 digit"),
+  kks: Yup.string().length(6, "No. KKS berjumlah 6 digit"),
+  pkh: Yup.string().length(6, "No. PKH berjumlah 15 digit"),
 };
 
 {

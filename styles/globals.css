@@ -18,3 +18,7 @@ a {
 main{
   padding: 12px 72px ;
 }
+
+.validationLabel{
+  color: red;
+}
