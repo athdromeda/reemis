@@ -67,8 +67,9 @@ const Tab1 = () => {
               type="radio"
               value="WNI"
               id="inline-radio-1"
-              onClick={() => setWNA(false)}
+              onChange={() => setWNA(false)}
               checked={!isWNA}
+              defaultChecked
             />
             <Form.Check
               inline
@@ -76,7 +77,7 @@ const Tab1 = () => {
               name="group2"
               type="radio"
               value="WNA"
-              onClick={() => setWNA(true)}
+              onChange={() => setWNA(true)}
               id="inline-radio-2"
               checked={isWNA}
             />
