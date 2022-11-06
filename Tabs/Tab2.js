@@ -11,7 +11,7 @@ const validationSchema = Yup.object({
   motherNik: YupSchema.nik,
 });
 
-const Tab2 = () => {
+const Tab2 = ({toTab}) => {
   const formik = useFormik({
     initialValues: {},
     validationSchema,
@@ -41,7 +41,7 @@ const Tab2 = () => {
 
       <TextInput
         id="motherPhone"
-        label="No. HP"
+        label="No. HP (Opsional)"
         handleChange={formik.handleChange}
         handleValue={formik.values.motherPhone}
         errorLog={formik.errors.motherPhone}
@@ -63,8 +63,14 @@ const Tab2 = () => {
         handleValue={formik.values.education}
       />
 
-      <Button variant="primary" onClick={formik.handleSubmit}>
-        Submit
+      <Button
+        variant="primary"
+        onClick={() => {
+          formik.handleSubmit && toTab(3);
+        }}
+        disabled={!formik.isValid && formik.dirty}
+      >
+        Lanjut
       </Button>
     </Form>
   );

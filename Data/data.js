@@ -89,10 +89,17 @@ export const DropdownOptions = {
 };
 
 export const YupSchema = {
-  name: Yup.string().min(12, "Banyakin lagi").required("Wajib diisi"),
-  nik: Yup.string().length(16, "NIK berjumlah 16 digit").required("Wajib diisi"),
-  kk: Yup.string().length(16, "No. KK berjumlah 16 digit").required("Wajib diisi"),
-  nisn: Yup.string().length(10, "No. NISN berjumlah 10 digit").required("Wajib diisi"),
+  name: Yup.string().required("Wajib diisi"),
+  birthPlace: Yup.string().required("Wajib diisi"),
+  nik: Yup.string()
+    .length(16, "NIK berjumlah 16 digit")
+    .required("Wajib diisi"),
+  kk: Yup.string()
+    .length(16, "No. KK berjumlah 16 digit")
+    .required("Wajib diisi"),
+  nisn: Yup.string()
+    .length(10, "No. NISN berjumlah 10 digit")
+    .required("Wajib diisi"),
   nism: Yup.string().length(18, "No. NISM berjumlah 18 digit"),
   kip: Yup.string().length(6, "No. KIP berjumlah 6 digit"),
   kks: Yup.string().length(6, "No. KKS berjumlah 6 digit"),
@@ -106,5 +113,16 @@ export const YupSchema = {
             Nama Ayah, NIK, KK, Telepon, Pekerjaan, Pendidikan, Rata Penghasilan,
             Nama Wali, Hubungan Wali, NIK, Pekerjaan, Rata Penghasilan,
             RT, RW, Alamat rinci, Provinsi, Kab/Kota, Kec., Pos
-            ] */
+            ] 
+            
+            {
+              no: "6/6/2021 11:42:26",
+              name: "Muamanah xxxxx",
+              gender: "Perempuan",
+              birthPlace: "xxxxx",
+              birthDate: "6/29/xxxxx",
+              ortuName: "Sxxxxx",
+              ortuTelp: "08xxxxxxx",
+            },
+            */
 }

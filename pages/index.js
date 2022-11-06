@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Head from "next/head";
@@ -10,8 +10,9 @@ import Tab4 from "../Tabs/Tab4";
 import Tab5 from "../Tabs/Tab5";
 import { google } from "googleapis";
 
+export const DataContext = createContext();
+
 export default function Home({ santris }) {
-  console.log("SANTRI", { santris });
   return (
     <div>
       <Head>
@@ -22,15 +23,15 @@ export default function Home({ santris }) {
       <TopNav />
 
       <main>
-        <ControlledTabs />
+        <ControlledTabs data={santris} />
       </main>
-      {santris}
     </div>
   );
 }
 
-function ControlledTabs() {
-  const [key, setKey] = useState("1");
+function ControlledTabs({ data }) {
+  const [selected, setSelected] = useState(0);
+  const [key, setKey] = useState(1);
 
   return (
     <Tabs
@@ -40,20 +41,25 @@ function ControlledTabs() {
       className="mb-3"
       justify
     >
-      <Tab eventKey="1" title="1 - Data Diri">
-        <Tab1 />
+      <Tab eventKey={1} title="1 - Data Diri">
+        <Tab1
+          setSelected={setSelected}
+          selectedId={selected}
+          dataRaw={data}
+          toTab={setKey}
+        />
       </Tab>
-      <Tab eventKey="2" title="2 - Data Ibu">
-        <Tab2 />
+      <Tab eventKey={2} title="2 - Data Ibu">
+        <Tab2 toTab={setKey} />
       </Tab>
-      <Tab eventKey="3" title="3 - Data Ayah">
-        <Tab3 />
+      <Tab eventKey={3} title="3 - Data Ayah">
+        <Tab3 toTab={setKey} />
       </Tab>
-      <Tab eventKey="4" title="4 - Data Wali">
-        <Tab4 />
+      <Tab eventKey={4} title="4 - Data Wali">
+        <Tab4 toTab={setKey} />
       </Tab>
-      <Tab eventKey="5" title="5 - Alamat">
-        <Tab5 />
+      <Tab eventKey={5} title="5 - Alamat">
+        <Tab5 toTab={setKey} />
       </Tab>
     </Tabs>
   );
@@ -79,7 +85,15 @@ export async function getServerSideProps() {
     if (rows.length) {
       return {
         props: {
-          santris: rows,
+          santris: rows.map((row) => ({
+            no: row[0],
+            name: row[2],
+            gender: row[3],
+            birthPlace: row[4],
+            birthDate: row[5],
+            ortuName: row[12],
+            ortuTelp: row[14],
+          })),
         },
       };
     }
@@ -88,7 +102,7 @@ export async function getServerSideProps() {
   }
   return {
     props: {
-      santris: 'rows',
+      santris: "rows",
     },
   };
 }

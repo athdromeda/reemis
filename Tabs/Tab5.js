@@ -8,7 +8,7 @@ import * as Yup from "yup";
 
 const validationSchema = Yup.object({});
 
-const Tab5 = () => {
+const Tab5 = ({toTab}) => {
   const formik = useFormik({
     initialValues: {},
     validationSchema,
@@ -69,6 +69,16 @@ const Tab5 = () => {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Dropdown label="Kec" options={DropdownOptions.statusRumah} />
       </Form.Group>
+
+      <Button
+        variant="primary"
+        onClick={() => {
+          formik.handleSubmit && toTab(6);
+        }}
+        disabled={!(formik.isValid && formik.dirty)}
+      >
+        Selesai
+      </Button>
     </Form>
   );
 };

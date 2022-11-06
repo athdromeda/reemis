@@ -1,5 +1,5 @@
 import Dropdown from "../Components/Dropdown";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import { DropdownOptions } from "../Data/data";
 import { useFormik } from "formik";
 import { YupSchema } from "../Data/data";
@@ -11,7 +11,7 @@ const validationSchema = Yup.object({
   waliNik: YupSchema.nik,
 });
 
-const Tab4 = () => {
+const Tab4 = ({ toTab }) => {
   const formik = useFormik({
     initialValues: {},
     validationSchema,
@@ -23,9 +23,13 @@ const Tab4 = () => {
 
   return (
     <Form>
+      <Alert variant="primary">
+        Bagian ini bersifat opsional. Boleh diisi boleh dilewati.
+      </Alert>
+
       <TextInput
         id="fatherName"
-        label="Nama Ayah"
+        label="Nama Wali"
         handleChange={formik.handleChange}
         handleValue={formik.values.fatherName}
         errorLog={formik.errors.fatherName}
@@ -62,6 +66,16 @@ const Tab4 = () => {
         handleChange={formik.handleChange}
         handleValue={formik.values.salary}
       />
+
+      <Button
+        variant="primary"
+        onClick={() => {
+          formik.handleSubmit && toTab(5);
+        }}
+        disabled={!formik.isValid}
+      >
+        Lanjut
+      </Button>
     </Form>
   );
 };
