@@ -8,7 +8,7 @@ import * as Yup from "yup";
 
 const validationSchema = Yup.object({});
 
-const Tab5 = ({toTab}) => {
+const Tab5 = ({ toTab, handleData, submitData }) => {
   const formik = useFormik({
     initialValues: {},
     validationSchema,
@@ -73,7 +73,9 @@ const Tab5 = ({toTab}) => {
       <Button
         variant="primary"
         onClick={() => {
-          formik.handleSubmit && toTab(6);
+          formik.handleSubmit && toTab(1);
+          handleData(formik.values);
+          setTimeout(()=>submitData(), 3000);
         }}
         disabled={!(formik.isValid && formik.dirty)}
       >

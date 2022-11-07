@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Head from "next/head";
@@ -8,9 +8,6 @@ import Tab2 from "../Tabs/Tab2";
 import Tab3 from "../Tabs/Tab3";
 import Tab4 from "../Tabs/Tab4";
 import Tab5 from "../Tabs/Tab5";
-import { google } from "googleapis";
-
-export const DataContext = createContext();
 
 export default function Home({ santris }) {
   return (
@@ -32,6 +29,23 @@ export default function Home({ santris }) {
 function ControlledTabs({ data }) {
   const [selected, setSelected] = useState(0);
   const [key, setKey] = useState(1);
+  const [formData, setFormData] = useState({});
+
+  const handlePost = async () => {
+    
+    await fetch("/api/postData", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+  };
+
+  const handleData = (data) => {
+    setFormData((prev) => ({ ...prev, ...data }));
+  };
 
   return (
     <Tabs
@@ -47,19 +61,24 @@ function ControlledTabs({ data }) {
           selectedId={selected}
           dataRaw={data}
           toTab={setKey}
+          handleData={handleData}
         />
       </Tab>
       <Tab eventKey={2} title="2 - Data Ibu">
-        <Tab2 toTab={setKey} />
+        <Tab2 toTab={setKey} handleData={handleData} />
       </Tab>
       <Tab eventKey={3} title="3 - Data Ayah">
-        <Tab3 toTab={setKey} />
+        <Tab3 toTab={setKey} handleData={handleData} />
       </Tab>
       <Tab eventKey={4} title="4 - Data Wali">
-        <Tab4 toTab={setKey} />
+        <Tab4 toTab={setKey} handleData={handleData} />
       </Tab>
       <Tab eventKey={5} title="5 - Alamat">
-        <Tab5 toTab={setKey} />
+        <Tab5
+          toTab={setKey}
+          handleData={handleData}
+          submitData={() => handlePost()}
+        />
       </Tab>
     </Tabs>
   );
@@ -78,7 +97,7 @@ export async function getServerSideProps() {
     const sheets = google.sheets({ version: "v4", auth: jwt });
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SPREADSHEET_ID,
-      range: "Form Responses 1", // sheet name
+      range: "Form Responses 1",
     });
 
     const rows = response.data.values;

@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
   kk: YupSchema.kk,
 });
 
-const Tab1 = ({ setSelected, selectedId, dataRaw, toTab }) => {
+const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
   const [showList, setShowList] = useState(true);
   const [name, setName] = useState("");
   const [isMen, setMen] = useState(true);
@@ -307,6 +307,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab }) => {
         variant="primary"
         onClick={() => {
           formik.handleSubmit && toTab(2);
+          handleData(formik.values)
         }}
         disabled={!(formik.isValid && formik.dirty)}
       >

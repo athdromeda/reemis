@@ -11,7 +11,7 @@ const validationSchema = Yup.object({
   fatherNik: YupSchema.nik,
 });
 
-const Tab3 = ({toTab}) => {
+const Tab3 = ({ toTab, handleData }) => {
   const formik = useFormik({
     initialValues: {},
     validationSchema,
@@ -75,6 +75,7 @@ const Tab3 = ({toTab}) => {
         variant="primary"
         onClick={() => {
           formik.handleSubmit && toTab(4);
+          handleData(formik.values);
         }}
         disabled={!(formik.isValid && formik.dirty)}
       >
