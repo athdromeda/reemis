@@ -8,8 +8,9 @@ import Tab2 from "../Tabs/Tab2";
 import Tab3 from "../Tabs/Tab3";
 import Tab4 from "../Tabs/Tab4";
 import Tab5 from "../Tabs/Tab5";
+import { google } from "googleapis";
 
-export default function Home({ santris }) {
+export default function Home({ santris, provs }) {
   return (
     <div>
       <Head>
@@ -20,7 +21,7 @@ export default function Home({ santris }) {
       <TopNav />
 
       <main>
-        <ControlledTabs data={santris} />
+        <ControlledTabs data={santris} provs={provs} />
       </main>
     </div>
   );
@@ -30,9 +31,9 @@ function ControlledTabs({ data }) {
   const [selected, setSelected] = useState(0);
   const [key, setKey] = useState(1);
   const [formData, setFormData] = useState({});
+  const [prov, setProv] = useState();
 
   const handlePost = async () => {
-    
     await fetch("/api/postData", {
       method: "POST",
       headers: {
@@ -41,6 +42,17 @@ function ControlledTabs({ data }) {
       },
       body: JSON.stringify(formData),
     });
+  };
+
+  const handleProvs = async () => {
+    const provsData = await fetch("/api/location/provinces", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+    console.log(provsData);
+    setProv(provsData);
   };
 
   const handleData = (data) => {
@@ -63,6 +75,7 @@ function ControlledTabs({ data }) {
           toTab={setKey}
           handleData={handleData}
         />
+        <button onClick={() => handleProvs()}>Get Provs</button>
       </Tab>
       <Tab eventKey={2} title="2 - Data Ibu">
         <Tab2 toTab={setKey} handleData={handleData} />
@@ -78,6 +91,7 @@ function ControlledTabs({ data }) {
           toTab={setKey}
           handleData={handleData}
           submitData={() => handlePost()}
+          provsData={prov}
         />
       </Tab>
     </Tabs>
