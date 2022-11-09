@@ -28,6 +28,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
   const [showList, setShowList] = useState(true);
   const [name, setName] = useState("");
   const [isMen, setMen] = useState(true);
+  const [isMukim, setMukim] = useState(true);
   const [isWNA, setWNA] = useState(false);
 
   // console.log(data)
@@ -127,7 +128,6 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
               id="inline-radio-1"
               onChange={() => setMen(true)}
               checked={isMen}
-              defaultChecked
             />
             <Form.Check
               inline
@@ -154,7 +154,6 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
               id="inline-radio-1"
               onChange={() => setWNA(false)}
               checked={!isWNA}
-              defaultChecked
             />
             <Form.Check
               inline
@@ -292,7 +291,8 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
           name="group3"
           type="radio"
           id="inline-radio-1"
-          checked
+          onChange={() => setMukim(true)}
+          checked={isMukim}
         />
         <Form.Check
           inline
@@ -300,6 +300,8 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
           name="group3"
           type="radio"
           id="inline-radio-2"
+          onChange={() => setMukim(false)}
+          checked={!isMukim}
         />
       </Form.Group>
 
