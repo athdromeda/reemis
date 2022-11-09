@@ -3,16 +3,22 @@ import { Form } from "react-bootstrap";
 const Dropdown = ({
   id = "",
   label,
-  options,
-  handleChange = false,
-  handleValue = false,
+  options = ["Data", "not", "displayed", "correctly"],
+  handleChange = () => {
+    return;
+  },
+  handleValue = "",
 }) => {
   return (
     <Form.Group className="mb-3" controlId={id}>
       <Form.Label>{label}</Form.Label>
       <Form.Select onChange={handleChange} value={handleValue}>
         {options.map((item) => {
-          return <option value={item}>{item}</option>;
+          return (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          );
         })}
       </Form.Select>
     </Form.Group>
