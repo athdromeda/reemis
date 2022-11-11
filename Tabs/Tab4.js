@@ -13,7 +13,13 @@ const validationSchema = Yup.object({
 
 const Tab4 = ({ toTab, handleData }) => {
   const formik = useFormik({
-    initialValues: {},
+    initialValues: {
+      waliName: '',
+      waliNik: '',
+      waliRelation: 'Kakek/Nenek',
+      waliJob: 'Tidak bekerja',
+      waliIncome: 'Tidak berpenghasilan',
+    },
     validationSchema,
     onSubmit: (vals) => {
       alert(JSON.stringify(vals, null, 2));
@@ -28,43 +34,43 @@ const Tab4 = ({ toTab, handleData }) => {
       </Alert>
 
       <TextInput
-        id="fatherName"
+        id="waliName"
         label="Nama Wali"
         handleChange={formik.handleChange}
-        handleValue={formik.values.fatherName}
-        errorLog={formik.errors.fatherName}
+        handleValue={formik.values.waliName}
+        errorLog={formik.errors.waliName}
       />
 
       <TextInput
-        id="fatherNik"
+        id="waliNik"
         label="NIK"
         handleChange={formik.handleChange}
-        handleValue={formik.values.fatherNik}
-        errorLog={formik.errors.fatherNik}
+        handleValue={formik.values.waliNik}
+        errorLog={formik.errors.waliNik}
       />
 
       <Dropdown
-        id="relation"
+        id="waliRelation"
         label="Hubungan Wali"
         options={DropdownOptions.hubunganWali}
         handleChange={formik.handleChange}
-        handleValue={formik.values.relation}
+        handleValue={formik.values.waliRelation}
       />
 
       <Dropdown
-        id="job"
+        id="waliJob"
         label="Pekerjaan"
         options={DropdownOptions.pekerjaan}
         handleChange={formik.handleChange}
-        handleValue={formik.values.job}
+        handleValue={formik.values.waliJob}
       />
 
       <Dropdown
-        id="salary"
+        id="waliIncome"
         label="Rata-rata Penghasilan"
         options={DropdownOptions.penghasilan}
         handleChange={formik.handleChange}
-        handleValue={formik.values.salary}
+        handleValue={formik.values.waliIncome}
       />
 
       <Button
@@ -73,7 +79,7 @@ const Tab4 = ({ toTab, handleData }) => {
           formik.handleSubmit && toTab(5);
           handleData(formik.values)
         }}
-        disabled={!formik.isValid}
+        // disabled={!formik.isValid}
       >
         Lanjut
       </Button>

@@ -30,8 +30,49 @@ export default function Home({ santris, provs }) {
 function ControlledTabs({ data }) {
   const [selected, setSelected] = useState(0);
   const [key, setKey] = useState(1);
-  const [formData, setFormData] = useState({});
-  const [prov, setProv] = useState();
+  const [formData, setFormData] = useState({
+    name: "",
+    gender: "Laki-laki",
+    nationality: "WNI",
+    passport: "",
+    birthPlace: "",
+    birthDate: "",
+    nisn: "",
+    kk: "",
+    nik: "",
+    nism: "",
+    kip: "",
+    pkh: "",
+    kks: "",
+    hobi: "Olahraga",
+    citaCita: "PNS",
+    kebutuhanKhusus: "Tidak Ada",
+    statusRumah: "Tinggal dengan Orangtua/Wali",
+    mukim: "Mukim",
+    motherName: "",
+    motherNik: "",
+    motherPhone: "",
+    motherJob: "Tidak bekerja",
+    motherEducation: "Tidak memiliki pendidikan formal",
+    fatherName: "",
+    fatherNik: "",
+    fatherPhone: "",
+    fatherJob: "Tidak bekerja",
+    fatherEducation: "Tidak memiliki pendidikan formal",
+    fatherIncome: "Tidak berpenghasilan",
+    waliName: "",
+    waliNik: "",
+    waliRelation: "Kakek/Nenek",
+    waliJob: "Tidak bekerja",
+    waliIncome: "Tidak berpenghasilan",
+    regency: "",
+    province: "",
+    kecamatan: "",
+    rt: "",
+    rw: "",
+    postalCode: "",
+    alamatLengkap: "",
+  });
 
   const handlePost = async () => {
     await fetch("/api/postData", {
@@ -44,17 +85,6 @@ function ControlledTabs({ data }) {
     });
   };
 
-  const handleProvs = async () => {
-    const provsData = await fetch("/api/location/provinces", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
-    console.log(provsData);
-    setProv(provsData);
-  };
-
   const handleData = (data) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
@@ -63,7 +93,7 @@ function ControlledTabs({ data }) {
     <Tabs
       id="controlled-tab-example"
       activeKey={key}
-      onSelect={(k) => setKey(k)}
+      // onSelect={(k) => setKey(k)}
       className="mb-3"
       justify
     >
@@ -75,7 +105,6 @@ function ControlledTabs({ data }) {
           toTab={setKey}
           handleData={handleData}
         />
-        <button onClick={() => handleProvs()}>Get Provs</button>
       </Tab>
       <Tab eventKey={2} title="2 - Data Ibu">
         <Tab2 toTab={setKey} handleData={handleData} />
@@ -91,7 +120,6 @@ function ControlledTabs({ data }) {
           toTab={setKey}
           handleData={handleData}
           submitData={() => handlePost()}
-          provsData={prov}
         />
       </Tab>
     </Tabs>
@@ -131,11 +159,6 @@ export async function getServerSideProps() {
       };
     }
   } catch (err) {
-    console.log(err);
+    console.log(err, "Error fetching sheet data");
   }
-  return {
-    props: {
-      santris: "rows",
-    },
-  };
 }

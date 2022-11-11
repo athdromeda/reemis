@@ -43,7 +43,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
 
   const handleName = (name) => {
     setName(toTitleCase(name));
-    formik.setFieldValue("name", name);
+    formik.setFieldValue("name", toTitleCase(name));
   };
 
   const handleSelection = (res) => {
@@ -58,8 +58,8 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
     formik.setFieldValue("birthPlace", toTitleCase(dataRaw[id].birthPlace));
 
     //Birthday
-    const birthDay = new Date(+year, month - 1, +day);
-    formik.setFieldValue("birthDate", birthDay);
+    const birthDay = new Date(+year, month - 1, +day + 1);
+    formik.setFieldValue("birthDate", birthDay.toISOString().slice(0,10));
 
     //NISN
     formik.setFieldValue("nisn", year.substring(1));
@@ -87,7 +87,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
           handleName(e.target.value);
           setShowList(true);
         }}
-        handleValue={formik.values.name}
+        handleValue={formik.values.name || ''}
         errorLog={formik.errors.name}
       />
 
@@ -175,14 +175,18 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
             id="birthPlace"
             label="Tempat"
             handleChange={formik.handleChange}
-            handleValue={formik.values.birthPlace}
+            handleValue={formik.values.birthPlace || ''}
             errorLog={formik.errors.birthPlace}
           />
         </Col>
         <Col>
           <Form.Group className="mb-3" controlId="birthDate">
             <Form.Label>Tanggal Lahir</Form.Label>
-            <Form.Control type="date" />
+            <Form.Control
+              type="date"
+              onChange={formik.handleChange}
+              value={formik.values.birthDate || ''}
+            />
           </Form.Group>
         </Col>
       </Row>
@@ -191,7 +195,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
         id="nisn"
         label="NISN"
         handleChange={formik.handleChange}
-        handleValue={formik.values.nisn}
+        handleValue={formik.values.nisn || ''}
         errorLog={formik.errors.nisn}
       />
 
@@ -199,7 +203,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
         id="kk"
         label="KK"
         handleChange={formik.handleChange}
-        handleValue={formik.values.kk}
+        handleValue={formik.values.kk || ''}
         errorLog={formik.errors.kk}
       />
 
@@ -207,7 +211,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
         id="nik"
         label="NIK"
         handleChange={formik.handleChange}
-        handleValue={formik.values.nik}
+        handleValue={formik.values.nik || ''}
         errorLog={formik.errors.nik}
       />
 
@@ -215,7 +219,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
         id="nism"
         label="NISM (Opsional)"
         handleChange={formik.handleChange}
-        handleValue={formik.values.nism}
+        handleValue={formik.values.nism || ''}
         errorLog={formik.errors.nism}
       />
 
@@ -223,7 +227,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
         id="kip"
         label="KIP (Opsional)"
         handleChange={formik.handleChange}
-        handleValue={formik.values.kip}
+        handleValue={formik.values.kip || ''}
         errorLog={formik.errors.kip}
       />
 
@@ -231,7 +235,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
         id="pkh"
         label="PKH (Opsional)"
         handleChange={formik.handleChange}
-        handleValue={formik.values.pkh}
+        handleValue={formik.values.pkh || ''}
         errorLog={formik.errors.pkh}
       />
 
@@ -239,19 +243,19 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
         id="kks"
         label="KKS (Opsional)"
         handleChange={formik.handleChange}
-        handleValue={formik.values.kks}
+        handleValue={formik.values.kks || ''}
         errorLog={formik.errors.kks}
       />
 
       {isWNA && (
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="passport">
           <Form.Label>No Paspor</Form.Label>
           <Form.Control type="text" placeholder="Masukkan Nomor Paspor" />
         </Form.Group>
       )}
 
       <Dropdown
-        id="hobby"
+        id="hobi"
         label="Hobi"
         options={DropdownOptions.hobi}
         handleChange={formik.handleChange}
@@ -259,7 +263,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
       />
 
       <Dropdown
-        id="dream"
+        id="citaCita"
         label="Cita"
         options={DropdownOptions.citaCita}
         handleChange={formik.handleChange}
@@ -267,7 +271,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
       />
 
       <Dropdown
-        id="specialNeeds"
+        id="kebutuhanKhusus"
         label="Kebutuhan Khusus"
         options={DropdownOptions.kebutuhanKhusus}
         handleChange={formik.handleChange}
@@ -282,7 +286,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
         handleValue={formik.values.statusRumah}
       />
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="mukim">
         <Form.Label>Status Mukim</Form.Label>
         <br />
         <Form.Check
@@ -309,7 +313,7 @@ const Tab1 = ({ setSelected, selectedId, dataRaw, toTab, handleData }) => {
         variant="primary"
         onClick={() => {
           formik.handleSubmit && toTab(2);
-          handleData(formik.values)
+          handleData(formik.values);
         }}
         disabled={!(formik.isValid && formik.dirty)}
       >

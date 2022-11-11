@@ -48,27 +48,27 @@ const Tab3 = ({ toTab, handleData }) => {
       />
 
       <Dropdown
-        id="job"
+        id="fatherJob"
         label="Pekerjaan"
         options={DropdownOptions.pekerjaan}
         handleChange={formik.handleChange}
-        handleValue={formik.values.job}
+        handleValue={formik.values.fatherJob}
       />
 
       <Dropdown
-        id="education"
+        id="fatherEducation"
         label="Pendidikan"
         options={DropdownOptions.pendidikan}
         handleChange={formik.handleChange}
-        handleValue={formik.values.education}
+        handleValue={formik.values.fatherEducation}
       />
 
       <Dropdown
-        id="salary"
+        id="fatherIncome"
         label="Rata-rata Penghasilan"
         options={DropdownOptions.penghasilan}
         handleChange={formik.handleChange}
-        handleValue={formik.values.salary}
+        handleValue={formik.values.fatherIncome}
       />
 
       <Button

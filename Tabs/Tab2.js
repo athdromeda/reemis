@@ -48,19 +48,19 @@ const Tab2 = ({ toTab, handleData }) => {
       />
 
       <Dropdown
-        id="job"
+        id="motherJob"
         label="Pekerjaan"
         options={DropdownOptions.pekerjaan}
         handleChange={formik.handleChange}
-        handleValue={formik.values.job}
+        handleValue={formik.values.motherJob}
       />
 
       <Dropdown
-        id="education"
+        id="motherEducation"
         label="Pendidikan"
         options={DropdownOptions.pendidikan}
         handleChange={formik.handleChange}
-        handleValue={formik.values.education}
+        handleValue={formik.values.motherEducation}
       />
 
       <Button
